@@ -678,7 +678,19 @@ function addAll() {
     if (!cart[id]) {
       card.querySelector('.add-btn').click();
     }
+    // set to max qty for non-lot items
+    if (cart[id] && card.dataset.lot !== '1') {
+      const max = parseInt(card.dataset.max);
+      if (max > 1) {
+        cart[id].qty = max;
+        const qv = card.querySelector('.qty-val');
+        if (qv) qv.textContent = max;
+        const sv = card.querySelector('.subtotal-val');
+        if (sv) sv.textContent = fmtPrice(max * cart[id].price);
+      }
+    }
   });
+  updateCartBar();
 }
 </script>
 
