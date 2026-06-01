@@ -121,6 +121,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 28px 16px 60px; }
     <span id="cart-count">0 stavki</span>
     <span id="cart-total">0 RSD</span>
   </div>
+  <button id="add-all-btn" onclick="addAll()">✚ Dodaj sve</button>
   <button id="dl-btn" onclick="downloadList()" disabled>⬇ Preuzmi listu</button>
 </div>
 <main>
@@ -670,6 +671,15 @@ document.querySelectorAll('.card-img').forEach(div => {
     openLightbox(srcs, cur);
   });
 });
+
+function addAll() {
+  document.querySelectorAll('.card').forEach(card => {
+    const id = card.dataset.id;
+    if (!cart[id]) {
+      card.querySelector('.add-btn').click();
+    }
+  });
+}
 </script>
 
 <div id="lightbox" onclick="closeLightbox(event)">
